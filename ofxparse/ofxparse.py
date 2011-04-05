@@ -8,12 +8,16 @@ class Account(object):
         self.number = ''
         self.routing_number = ''
         self.statement = None
+    def __str__(self):
+        return "Accout: %s, routing number: %s" % (self.number, self.routing_number)
 
 class Statement(object):
     def __init__(self):
         self.start_date = ''
         self.end_date = ''
         self.transactions = []
+    def __str__(self):
+        return "Statment start: %s stop: %s with %s transations" % (self.start_date, self.end_date, len(self.transactions))
 
 class Transaction(object):
     def __init__(self):
