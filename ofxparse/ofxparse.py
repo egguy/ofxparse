@@ -27,6 +27,8 @@ class Transaction(object):
         self.amount = ''
         self.id = ''
         self.memo = ''
+    def __repr__(self):
+        return "<Transaction %s>" % self.id
 
 class Institution(object):
     pass
@@ -97,22 +99,22 @@ class OfxParser(object):
 
         name_tag = txn_ofx.find('name')
         if hasattr(name_tag, "contents"):
-            transaction.payee = name_tag.contents[0]
+            transaction.name = name_tag.contents[0].strip()
 
         memo_tag = txn_ofx.find('memo')
         if hasattr(memo_tag, "contents"):
-            transaction.memo = memo_tag.contents[0]
+            transaction.memo = memo_tag.contents[0].strip()
 
         amt_tag = txn_ofx.find('trnamt')
         if hasattr(amt_tag, "contents"):
-            transaction.amount = amt_tag.contents[0]
+            transaction.amount = amt_tag.contents[0].strip()
 
         date_tag = txn_ofx.find('dtposted')
         if hasattr(date_tag, "contents"):
-            transaction.date = date_tag.contents[0]
+            transaction.date = date_tag.contents[0].strip()
 
         id_tag = txn_ofx.find('fitid')
         if hasattr(id_tag, "contents"):
-            transaction.id = id_tag.contents[0]
+            transaction.id = id_tag.contents[0].strip()
 
         return transaction
